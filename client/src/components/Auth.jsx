@@ -4,11 +4,30 @@ import axios from 'axios';
 
 import signinImage from '../assets/signup.jpeg';
 
-const Auth = () => {
+// set up initial state for the form values to be empty
+const initialState = {
+    fullName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: '',
+    avatarURL: '',
+}
 
+const Auth = () => {
+    // set up state
+    const[form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(true);
 
-    const handleChange = () => {};
+    // handle input change in the form
+    const handleChange = (e) => {
+        setForm({...form, [e.target.name]: e.target.value});
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(form);
+    }
 
     //changing the state of isSignup whether or not we're signing up
     // if we're signing up, we'll render the signup form
@@ -18,6 +37,7 @@ const Auth = () => {
     }
 
   return (
+    //   form container div for signup/login
     <div className='auth__form-container'>
         <div className='auth__form-container_fields'>
             <div className='auth__form-container_fields-content'>
@@ -25,7 +45,7 @@ const Auth = () => {
                      {/* if isSignup is true, display 'Sign Up' else display 'Sign In' */}
                     {isSignup ? 'Sign up' : 'Sign In'}
                 </p>
-                <form onSubmit={() => {}}>
+                <form onSubmit={handleSubmit}>
                     {isSignup && (
                         <div className='auth__form-container_fields-content_input'>
                             <label htmlFor='fullName'> Full Name</label>
@@ -94,7 +114,14 @@ const Auth = () => {
                             />
                         </div>
                     )}     
+                    {/* // if isSignup is true, display 'Sign Up' else display 'Sign In' */}
+                    <div className='auth__form-container_fields-content_button'>
+                        <button>
+                            {isSignup ? 'Sign Up' : 'Sign In'}
+                        </button>
+                    </div>
                 </form>
+                {/* // switch between signup and login */}
                 <div className='auth__form-container_fields-account'>
                     <p>
                         {isSignup 
@@ -108,6 +135,7 @@ const Auth = () => {
                 </div>
             </div>
         </div>
+        {/* // side image for signup/login */}
         <div className='auth__form-container_image'>
             <img src={signinImage} alt='sign in' />
         </div>
