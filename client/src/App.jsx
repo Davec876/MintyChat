@@ -3,7 +3,7 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
-import { ChannelContainer, ChannelListContainer } from './components';
+import { ChannelContainer, ChannelListContainer, Auth } from './components';
 // css imports
 import './App.css';
 
@@ -11,7 +11,13 @@ const apiKey = 'process.env.REACT_APP_STREAM_API_KEY';
 
 const client = StreamChat.getInstance(apiKey);
 
+const authToken = false;
+
 const App = () => {
+
+  // if we're not logged in, render the Auth component
+  if(!authToken) return <Auth />
+
   return (
     <div className='app__wrapper'>
         {/* Pass the client as an instance to the Chat component */}
