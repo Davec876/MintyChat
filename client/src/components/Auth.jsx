@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import signinImage from '../assets/signup.jpeg';
 
+const cookies = new Cookies();
+
+
 // set up initial state for the form values to be empty
 const initialState = {
     fullName: '',
@@ -24,9 +27,32 @@ const Auth = () => {
         setForm({...form, [e.target.name]: e.target.value});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(form);
+        
+        const{fullName, username, password, confirmPassword, phoneNumber, avatarURL} = form;
+
+        const URL = 'http://localhost:8000/auth';
+
+        //connect to the backend and send the form data
+        const { data: {token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+            username, password, fullName, phoneNumber, avatarURL,
+        });
+
+        // set the cookies
+        cookies.set('token', token);
+        cookies.set('username', username);
+        cookies.set('fullName', fullName);
+        cookies.set('userId', userId);
+
+        // storing all the data in cookies if the user is signing up
+        if(isSignup){
+            cookies.set('phoneNumber', phoneNumber);
+            cookies.set('avatarURL', avatarURL);
+            cookies.set('hashedPassword', hashedPassword);
+        }
+
+        window.location.reload();
     }
 
     //changing the state of isSignup whether or not we're signing up

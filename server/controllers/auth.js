@@ -24,8 +24,8 @@ const signup = async(req, res) => {
 
         res.status(200).json({token, fullName, username, userId, hashedPassword, phoneNumber});
 
-    }catch(err){
-        console.log(err);
+    }catch(error){
+        console.log(error);
         res.status(500).json({message: error });
     }
 
@@ -60,14 +60,12 @@ const login = async (req, res) => {
         }
 
 
-    }catch(err){
-        console.log(err);
+    }catch(error){ads
+        console.log(error);
         res.status(500).json({message: error });
     }
-
 };
 
 
-
 //exporting the functions
-modules.exports = { signup, login };
+modules.exports = { signup, login }
