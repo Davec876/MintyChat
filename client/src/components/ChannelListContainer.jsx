@@ -33,7 +33,7 @@ const CompanyHeader = () => (
 )
 
 // ChannelListContainer component to render the ChannelList component from StreamChat
-const ChannelListContainer = () => {
+const ChannelListContainer = ({isCreating,setIsCreating,setCreateType,setIsEditng}) => {
 
   //logout function
   const logout = () => {
@@ -62,6 +62,10 @@ const ChannelListContainer = () => {
               <TeamChannelList
                 {...listProps}
                 type="team"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditng={setIsEditng}
               />
           )}
           Preview={(previewProps) => (
@@ -78,6 +82,10 @@ const ChannelListContainer = () => {
               <TeamChannelList
                 {...listProps}
                 type="messaging"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditng={setIsEditng}
               />
           )}
           Preview={(previewProps) => (

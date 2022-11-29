@@ -2,7 +2,7 @@ import React from 'react'
 
 import { AddChannel } from '../assets';
 
-const TeamChannelList = ({ children, error = false, loading, type}) => {
+const TeamChannelList = ({ children, error = false, loading, type, isCreating,setIsCreating,setCreateType,setIsEditng}) => {
   // if there is an error, return the error message
     if(error) {
         return type === 'team' ? (
@@ -11,7 +11,7 @@ const TeamChannelList = ({ children, error = false, loading, type}) => {
                     Connection error, please wait and try again.
                 </p>
             </div>
-        ) : null;
+        ) : null
     }
   // If loading is true, render the loading indicator
     if(loading) {
@@ -28,9 +28,17 @@ const TeamChannelList = ({ children, error = false, loading, type}) => {
         <div className='team-channel-list'>
             <div className='team-channel-list__header'>
                 <p className='team-channel-list__header__title'>
-                {type === 'team' ? 'Channels' : 'Direct Messages'} 
+                    {type === 'team' ? 'Channels' : 'Direct Messages'} 
                 </p>
                 {/* Button add channel */}
+                <AddChannel 
+                    isCreating={isCreating}
+                    setIsCreating={setIsCreating}
+                    setCreateType={setCreateType}
+                    setIsEditng={setIsEditng}
+                    type={type === 'team' ? 'team' : 'messaging'}
+                />
+
             </div>
             {children}
         </div>
