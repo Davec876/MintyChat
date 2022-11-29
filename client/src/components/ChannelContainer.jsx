@@ -26,12 +26,8 @@ const ChannelContainer = ({ isCreating, setIsCreating, isEditing, setIsEditing, 
 
   const EmptyState = () => (
     <div className="channel-empty__container">
-      <p className="channel-empty__first">
-        This is the beginning of your chat history.
-      </p>  
-      <p className="channel-empty__second">
-        Send messages, attachments, links, emojis, and more!
-      </p> 
+      <p className="channel-empty__first"> This is the beginning of your chat history.</p>  
+      <p className="channel-empty__second">Send messages, attachments, links, emojis, and more!</p> 
     </div>
   )
 
@@ -40,8 +36,8 @@ const ChannelContainer = ({ isCreating, setIsCreating, isEditing, setIsEditing, 
         <Channel
         //if there are no messages in the channel, render the EmptyState component
           EmptyStateIndicator={EmptyState}
-          Message={(messageProps, i) => <TeamMessage key={i} {...messageProps} />}
-        >
+          >
+          {(messageProps, i) => <return key={i} {...messageProps} />}
           <ChannelInner setIsEditing={setIsEditing}/>
         </Channel>
     </div>
